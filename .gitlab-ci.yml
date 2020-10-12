@@ -142,6 +142,9 @@ linux64-sdk_wheel:
     paths:
       - build/dist/
     expire_in: 1day
+  tags:
+    - linux64
+    - docker
 
 linux64-sdk_official_release:
   image: onelab/debian.wheezy.64bit
