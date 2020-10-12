@@ -122,6 +122,14 @@ linux64-sdk_official_snapshot:
   variables:
     EXTRA_OPTION: "-DENABLE_BUILD_DYNAMIC=1 -DINSTALL_SDK_README=1 -DBLAS_LAPACK_LIBRARIES='/usr/local/lib/libopenblas.a;/usr/local/lib64/libgfortran.a;/usr/local/lib64/libquadmath.a;-lpthread'"
   <<: *linux_official
+  after_script:
+    - cd build
+    - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_x86_64
+  artifact:
+    paths:
+      - build/dist/*.whl
+    expire_in:
+      - 1 day
   except:
     - tags
 
@@ -170,6 +178,14 @@ linux32-sdk_official_snapshot:
   variables:
     EXTRA_OPTION: "-DENABLE_BUILD_DYNAMIC=1 -DINSTALL_SDK_README=1 -DBLAS_LAPACK_LIBRARIES='/usr/local/lib/libopenblas.a;/usr/local/lib/libgfortran.a;/usr/local/lib/libquadmath.a;-lpthread'"
   <<: *linux_official
+  after_script:
+    - cd build
+    - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_i686
+  artifact:
+    paths:
+      - build/dist/*.whl
+    expire_in:
+      - 1 day
   except:
     - tags
 
