@@ -150,7 +150,9 @@ python_wheels:
   dependencies:
     - linux64-sdk_wheel_tmp
   script:
-    - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_x86_64
+    - cd build
+    - ls
+    - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python3 setup-whl.py build bdist_wheel --plat-name manylinux1_x86_64
   artifacts:
     paths:
       - build/dist
