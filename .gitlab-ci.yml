@@ -128,8 +128,7 @@ linux64-sdk_official_snapshot:
   artifacts:
     paths:
       - build/dist/*.whl
-    expire_in:
-      - 1 day
+    expire_in: 1day
   except:
     - tags
 
@@ -184,8 +183,7 @@ linux32-sdk_official_snapshot:
   artifacts:
     paths:
       - build/dist/*.whl
-    expire_in:
-      - 1 day
+    expire_in: 1 day
   except:
     - tags
 
