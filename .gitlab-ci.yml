@@ -125,7 +125,7 @@ linux64-sdk_official_snapshot:
   after_script:
     - cd build
     - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_x86_64
-  artifact:
+  artifacts:
     paths:
       - build/dist/*.whl
     expire_in:
@@ -181,7 +181,7 @@ linux32-sdk_official_snapshot:
   after_script:
     - cd build
     - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_i686
-  artifact:
+  artifacts:
     paths:
       - build/dist/*.whl
     expire_in:
