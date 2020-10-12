@@ -122,15 +122,26 @@ linux64-sdk_official_snapshot:
   variables:
     EXTRA_OPTION: "-DENABLE_BUILD_DYNAMIC=1 -DINSTALL_SDK_README=1 -DBLAS_LAPACK_LIBRARIES='/usr/local/lib/libopenblas.a;/usr/local/lib64/libgfortran.a;/usr/local/lib64/libquadmath.a;-lpthread'"
   <<: *linux_official
-  after_script:
+  except:
+    - tags
+
+linux64-sdk_wheel:
+  image: onelab/debian.wheezy.64bit
+  variables:
+    EXTRA_OPTION: "-DENABLE_BUILD_DYNAMIC=1 -DINSTALL_SDK_README=1 -DBLAS_LAPACK_LIBRARIES='/usr/local/lib/libopenblas.a;/usr/local/lib64/libgfortran.a;/usr/local/lib64/libquadmath.a;-lpthread'"
+  script:
+    - mkdir build
     - cd build
+    - cmake -DCMAKE_BUILD_TYPE=Release -DGMSH_HOST=gmsh.info -DCMAKE_PREFIX_PATH='/usr/local' -DENABLE_PETSC=1 -DPETSC_ARCH=real_mumps_seq -DPETSC_DIR=/petsc-3.10.2 ${EXTRA_OPTION} ..
+    - make package -j 8
+    - PKG=`ls gmsh-*.tar*`
+    - scp ${PKG} geuzaine@gmsh.info:.wwwgmsh/bin/Linux/${PKG/\.tar\.gz/\.tgz}
+    - ctest -j 8 --output-on-failure
     - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_x86_64
   artifacts:
     paths:
-      - build/dist/*.whl
+      - build/dist/
     expire_in: 1day
-  except:
-    - tags
 
 linux64-sdk_official_release:
   image: onelab/debian.wheezy.64bit
@@ -177,13 +188,6 @@ linux32-sdk_official_snapshot:
   variables:
     EXTRA_OPTION: "-DENABLE_BUILD_DYNAMIC=1 -DINSTALL_SDK_README=1 -DBLAS_LAPACK_LIBRARIES='/usr/local/lib/libopenblas.a;/usr/local/lib/libgfortran.a;/usr/local/lib/libquadmath.a;-lpthread'"
   <<: *linux_official
-  after_script:
-    - cd build
-    - MSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux64-sdk/ python setup-whl.py build bdist_wheel --plat-name manylinux1_i686
-  artifacts:
-    paths:
-      - build/dist/*.whl
-    expire_in: 1 day
   except:
     - tags
 
