@@ -222,9 +222,8 @@ python_wheels:
     - GMSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Linux/TGZ/gmsh-git-Linux32-sdk/ python3 setup-whl.py build bdist_wheel --plat-name manylinux1_i686 --universal
     - GMSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/CYGWIN/ZIP/gmsh-git-Windows64-sdk/ python3 setup-whl.py build bdist_wheel --plat-name win_amd64 --universal
     - GMSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/CYGWIN/ZIP/gmsh-git-Windows32-sdk/ python3 setup-whl.py build bdist_wheel --plat-name win32 --universal
-    - chown -R validator _CPack_Packages/Darwin
-    - chmod +rw _CPack_Packages/Darwin/TGZ/gmsh-git-MacOSX-sdk/lib
-    - GMSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Darwin/TGZ/gmsh-git-MacOSX-sdk/ python3 setup-whl.py build bdist_wheel --plat-name macosx_10_9_x86_64 --universal
+    - cp -R _CPack_Packages/Darwin _CPack_Packages/Darwin2
+    - GMSH_SETUP_DIR=../utils/pypi/gmsh GMSH_SDK_DIR=_CPack_Packages/Darwin2/TGZ/gmsh-git-MacOSX-sdk/ python3 setup-whl.py build bdist_wheel --plat-name macosx_10_9_x86_64 --universal
   artifacts:
     paths:
       - build/dist
