@@ -72,6 +72,6 @@ setuptools.setup(
                  'Programming Language :: Python',
                  'Topic :: Scientific/Engineering'],
     scripts=scripts,
-    setup_requires=['requests'],
+    packages = [''],
     package_dir={'': os.path.join(sdkdir+'/lib')},
     data_files=data_files)

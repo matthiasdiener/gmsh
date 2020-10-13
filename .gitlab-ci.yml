@@ -132,7 +132,7 @@ linux64-sdk_wheel_tmp:
   script:
     - mkdir build
     - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DGMSH_HOST=gmsh.info -DCMAKE_PREFIX_PATH='/usr/local' -DENABLE_PETSC=1 -DPETSC_ARCH=real_mumps_seq -DPETSC_DIR=/petsc-3.10.2 -DENABLE_FLTK=0 -DENABLE_OCC_CAF=0  ${EXTRA_OPTION} ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DGMSH_HOST=gmsh.info -DCMAKE_PREFIX_PATH='/usr/local' -DENABLE_PETSC=1 -DPETSC_ARCH=real_mumps_seq -DPETSC_DIR=/petsc-3.10.2 ${EXTRA_OPTION} ..
     - make package -j 8
     - ctest -j 8 --output-on-failure
   artifacts:
