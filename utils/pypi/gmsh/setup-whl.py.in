@@ -12,7 +12,7 @@ setupdir = os.environ["GMSH_SETUP_DIR"]
 sdkdir = os.environ["GMSH_SDK_DIR"]
 
 version = '${GMSH_MAJOR_VERSION}.${GMSH_MINOR_VERSION}.${GMSH_PATCH_VERSION}'
-iversion = version + ''  # installer version (+ '-1' will create '.post1')
+iversion = version + '-1'  # installer version (+ '-1' will create '.post1')
 
 
 def gen_install_list(subdir):
