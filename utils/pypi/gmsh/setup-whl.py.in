@@ -23,7 +23,7 @@ def gen_install_list(subdir):
             data_files.append((relpath, filepaths))
 libversion = ".".join(version.split(".")[:2])
 
-if os.path.isfile(sdkdir+'/lib/gmsh-'+libversion+'dll'):
+if os.path.isfile(sdkdir+'/lib/gmsh-'+libversion+'.dll'):
     scripts = [os.path.join(setupdir,'gmsh'),
                os.path.join(setupdir,'gmsh.bat')]
     libs = ['gmsh.lib','gmsh-'+libversion+'.dll','gmsh.jl']
